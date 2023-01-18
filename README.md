@@ -1,3 +1,16 @@
+# Netflix Clone
+
+I made this project to practice Next.js, Typescript, to learn Tailwind CSS & deploy it to Vercel. In this website you can find a Netflix clone with The Movie Database API
+
+## technologies
+Next.js
+Typescript
+Tailwind CSS
+
+## You can see the app deployed here ↓
+https://netflix-clone-theta-eight-71.vercel.app/
+
+
 # Next.js + Tailwind CSS Example
 
 This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
