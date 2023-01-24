@@ -20,19 +20,12 @@ interface IAuth {
 
 const AuthContext = createContext<IAuth>({
   user: null,
-  signUp: async () => {
-    
-  },
-  signIn: async () => {
-    
-  },
-  logout: async () => {
-    
-  },
+  signUp: async () => {},
+  signIn: async () => {},
+  logout: async () => {},
   error: null,
   loading: false
 })
-//min 51.31
 
 interface AuthProviderProps {
   children: React.ReactNode
@@ -45,7 +38,23 @@ export const AuthProvider = ({children} : AuthProviderProps) => {
   const [error, setError] = useState(null)
   const router = useRouter()
 
-  useEffect(()=>{},[])//59.21
+  // Persisiting the user
+  useEffect(()=>{
+    onAuthStateChanged(auth, (user) =>{
+      if (user){
+        //Logged in...
+        setUser(user)
+        setLoading(false)
+      } else {
+        //Not logged in
+        setUser(null)
+        setLoading(true)
+        router.push('/login')
+      }
+
+      setInitialLoading(false)
+    })
+  },[auth])
   
   const signUp = async (email: string, password:string) => {
     setLoading(true)

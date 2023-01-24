@@ -4,6 +4,8 @@ import Header from '../components/Header'
 import requests from '../utils/requests'
 import { Movie } from '../typings'
 import Row from '../components/Row'
+import useAuth from '../hooks/useAuth'
+import { ToastContainer, toast } from 'react-toastify'
 
 interface Props {
   netflixOriginals: Movie[]
@@ -25,6 +27,21 @@ const Home = ({ netflixOriginals,
     romanceMovies,
     documentaries, } : Props) => {
   console.log(netflixOriginals)
+  const { logout, loading} = useAuth()
+  
+  if (loading) {
+    toast('🦄 Loading!', {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+  }
+
   return (
     <div className='relative h-screen bg-gradient-to-b  lg:h-[140vh] '>
       <Head>
