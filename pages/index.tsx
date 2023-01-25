@@ -6,6 +6,9 @@ import { Movie } from '../typings'
 import Row from '../components/Row'
 import useAuth from '../hooks/useAuth'
 import { ToastContainer, toast } from 'react-toastify'
+import { useRecoilValue } from 'recoil'
+import { modalState } from '../atoms/modalAtom'
+import Modal from '../components/Modal'
 
 interface Props {
   netflixOriginals: Movie[]
@@ -27,7 +30,8 @@ const Home = ({ netflixOriginals,
     romanceMovies,
     documentaries, } : Props) => {
   console.log(netflixOriginals)
-  const { logout, loading} = useAuth()
+  const { loading} = useAuth()
+  const showModal = useRecoilValue(modalState)
   
   if (loading) {
     toast('🦄 Loading!', {
@@ -64,7 +68,7 @@ const Home = ({ netflixOriginals,
 
         </section>
       </main>
-      {/* Modal */}
+      {showModal && <Modal/>}
     </div>
   )
 }
