@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { useRecoilValue } from 'recoil'
 import { modalState } from '../atoms/modalAtom'
 import Modal from '../components/Modal'
+import Plans from '../components/Plans'
 
 interface Props {
   netflixOriginals: Movie[]
@@ -32,6 +33,7 @@ const Home = ({ netflixOriginals,
   console.log(netflixOriginals)
   const { loading} = useAuth()
   const showModal = useRecoilValue(modalState)
+  const subscription = false
   
   if (loading) {
     toast('🦄 Loading!', {
@@ -45,6 +47,10 @@ const Home = ({ netflixOriginals,
       theme: "light",
       });
   }
+
+  if (subscription === null) return null
+
+  if (!subscription) return <Plans/>
 
   return (
     <div className={`relative h-screen bg-gradient-to-b  lg:h-[140vh] ${showModal && "!h-screen overflow-hidden"}`}>
