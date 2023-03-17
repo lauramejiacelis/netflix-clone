@@ -10,6 +10,8 @@ import { useRecoilValue } from 'recoil'
 import { modalState } from '../atoms/modalAtom'
 import Modal from '../components/Modal'
 import Plans from '../components/Plans'
+import { getProducts, Product } from '@stripe/firestore-stripe-payments'
+import payments from '../lib/stripe'
 
 interface Props {
   netflixOriginals: Movie[]
@@ -20,6 +22,7 @@ interface Props {
   horrorMovies: Movie[]
   romanceMovies: Movie[]
   documentaries: Movie[]
+  products: Product[]
 }
 
 const Home = ({ netflixOriginals,
@@ -29,8 +32,11 @@ const Home = ({ netflixOriginals,
     comedyMovies,
     horrorMovies,
     romanceMovies,
-    documentaries, } : Props) => {
-  console.log(netflixOriginals)
+    documentaries,
+    products
+  } : Props) => {
+  //console.log(products)
+  //console.log(netflixOriginals)
   const { loading} = useAuth()
   const showModal = useRecoilValue(modalState)
   const subscription = false
@@ -82,6 +88,14 @@ const Home = ({ netflixOriginals,
 export default Home
 
 export const getServerSideProps =async () => {
+  // const products = await getProducts(payments, {
+  //   includePrices: true,
+  //   activeOnly: true,
+  // })
+  //   .then((res)=> res)
+  //   .catch((err) => console.log(err.message))
+
+
   const [
     netflixOriginals,
     trendingNow,
@@ -112,7 +126,7 @@ export const getServerSideProps =async () => {
       horrorMovies: horrorMovies.results,
       romanceMovies: romanceMovies.results,
       documentaries: documentaries.results,
-      
+      //products,
     }
   }
 
