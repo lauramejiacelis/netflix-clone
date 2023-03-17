@@ -35,7 +35,7 @@ const Home = ({ netflixOriginals,
     documentaries,
     products
   } : Props) => {
-  //console.log(products)
+  console.log(products)
   //console.log(netflixOriginals)
   const { loading} = useAuth()
   const showModal = useRecoilValue(modalState)
@@ -56,7 +56,7 @@ const Home = ({ netflixOriginals,
 
   if (subscription === null) return null
 
-  if (!subscription) return <Plans/>
+  if (!subscription) return <Plans products={products}/>
 
   return (
     <div className={`relative h-screen bg-gradient-to-b  lg:h-[140vh] ${showModal && "!h-screen overflow-hidden"}`}>
@@ -88,12 +88,12 @@ const Home = ({ netflixOriginals,
 export default Home
 
 export const getServerSideProps =async () => {
-  // const products = await getProducts(payments, {
-  //   includePrices: true,
-  //   activeOnly: true,
-  // })
-  //   .then((res)=> res)
-  //   .catch((err) => console.log(err.message))
+  const products = await getProducts(payments, {
+    includePrices: true,
+    activeOnly: true,
+  })
+    .then((res)=> res)
+    .catch((err) => console.log(err.message))
 
 
   const [
@@ -126,7 +126,7 @@ export const getServerSideProps =async () => {
       horrorMovies: horrorMovies.results,
       romanceMovies: romanceMovies.results,
       documentaries: documentaries.results,
-      //products,
+      products,
     }
   }
 

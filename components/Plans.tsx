@@ -1,10 +1,15 @@
 import { CheckIcon } from "@heroicons/react/24/solid";
+import { Product } from "@stripe/firestore-stripe-payments";
 import Head from "next/head";
 import Link from "next/link";
 import useAuth from "../hooks/useAuth";
 import Table from "./Table";
 
-const Plans = ()=>{
+interface Props {
+  products: Product[]
+}
+
+const Plans = ({products}: Props)=>{
   const {logout} = useAuth()
 
   return(
