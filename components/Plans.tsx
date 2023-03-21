@@ -52,19 +52,13 @@ const Plans = ({products}: Props)=>{
 
         <div className="mt-4 flex flex-col space-y-4">
           <div className="flex w-full items-center justify-end self-end md:w-3/5">
-            
-            <div className="planBox">
-              Standard
-            </div>
-            <div className="planBox">
-              Standard
-            </div>
-            <div className="planBox">
-              Standard
-            </div>
+            {products.map((product)=>(
+              <div key={product.id} className="planBox">{product.name}</div>
+            ))}
+
           </div>
 
-          <Table/>
+          <Table products={products}/>
 
           <button>Subscribe</button>
         </div>
