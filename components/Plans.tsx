@@ -2,6 +2,7 @@ import { CheckIcon } from "@heroicons/react/24/solid";
 import { Product } from "@stripe/firestore-stripe-payments";
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import Table from "./Table";
 
@@ -11,6 +12,7 @@ interface Props {
 
 const Plans = ({products}: Props)=>{
   const {logout} = useAuth()
+  const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[2])
 
   return(
     <div>
@@ -33,7 +35,8 @@ const Plans = ({products}: Props)=>{
           Sign Out
         </button>
       </header>
-      <main className="max-w-5xl px-5 pt-28 transition-all md:px-10">
+
+      <main className="mx-auto max-w-5xl px-5 pt-28 transition-all md:px-10">
         <h1 className="mb-3 text-3xl font-medium">Choose the plan that's right for you</h1>
         <ul>
           <li className="flex items-center gap-x-2 text-lg">
@@ -53,12 +56,20 @@ const Plans = ({products}: Props)=>{
         <div className="mt-4 flex flex-col space-y-4">
           <div className="flex w-full items-center justify-end self-end md:w-3/5">
             {products.map((product)=>(
-              <div key={product.id} className="planBox">{product.name}</div>
+              <div 
+                key={product.id} 
+                className={`planBox ${
+                  selectedPlan?.id === product.id ? 'opacity-100' : 'opacity-60'
+                }`}
+                onClick={()=> setSelectedPlan(product)}  
+              >
+                {product.name}
+               </div>
             ))}
 
           </div>
 
-          <Table products={products}/>
+          <Table products={products} selectedPlan={selectedPlan}/>
 
           <button>Subscribe</button>
         </div>
