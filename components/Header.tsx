@@ -1,29 +1,29 @@
-import { BellIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid'
+import { BellIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const {logout} = useAuth()
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { logout } = useAuth();
 
-  useEffect(()=>{
+  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
-        setIsScrolled(true)
+        setIsScrolled(true);
       } else {
-        setIsScrolled(false)
+        setIsScrolled(false);
       }
-    }
+    };
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  },[])
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
-  return ( 
+  return (
     <header className={`${isScrolled && 'bg-[#141414]'}`}>
       <div className="flex items-center space-x-2 md:space-x-10">
         <img
@@ -31,8 +31,8 @@ const Header = () => {
           width={100}
           height={100}
           className="cursor-pointer object-contain"
-        /> {/* No usó el componente de next js por los permisos */}
-
+        />{' '}
+        {/* No usó el componente de next js por los permisos */}
         <ul className="hidden space-x-4 md:flex">
           <li className="headerLink">Home</li>
           <li className="headerLink">TV Shows</li>
@@ -41,24 +41,22 @@ const Header = () => {
           <li className="headerLink">My List</li>
         </ul>
       </div>
-        
-      <div className='flex items-center space-x-4 text-sm font-light'>
-        <MagnifyingGlassIcon className='hidden h-6 w-6 sm:inline '/>
-        <p className='hidden lg:inline'>Kids</p>
-        <BellIcon className='h-6 w-6'/>
+
+      <div className="flex items-center space-x-4 text-sm font-light">
+        <MagnifyingGlassIcon className="hidden h-6 w-6 sm:inline " />
+        <p className="hidden lg:inline">Kids</p>
+        <BellIcon className="h-6 w-6" />
         {/* <Link href='/account'> */}
-          <img
+        <img
           onClick={logout}
-            src="http://zoeice.com/assets/img/uploads/profile.png"
-            alt=""
-            className="h-8 w-8 cursor-pointer rounded"
-          />        
+          src="http://zoeice.com/assets/img/uploads/profile.png"
+          alt=""
+          className="h-8 w-8 cursor-pointer rounded"
+        />
         {/* </Link> */}
-
-
       </div>
     </header>
   );
-}
+};
 
 export default Header;
