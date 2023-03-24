@@ -46,14 +46,13 @@ const Header = () => {
         <MagnifyingGlassIcon className="hidden h-6 w-6 sm:inline " />
         <p className="hidden lg:inline">Kids</p>
         <BellIcon className="h-6 w-6" />
-        {/* <Link href='/account'> */}
-        <img
-          onClick={logout}
-          src="http://zoeice.com/assets/img/uploads/profile.png"
-          alt=""
-          className="h-8 w-8 cursor-pointer rounded"
-        />
-        {/* </Link> */}
+        <Link href="/account">
+          <img
+            src="http://zoeice.com/assets/img/uploads/profile.png"
+            alt=""
+            className="h-8 w-8 cursor-pointer rounded"
+          />
+        </Link>
       </div>
     </header>
   );
