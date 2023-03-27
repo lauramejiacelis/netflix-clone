@@ -7,12 +7,13 @@ import Row from '../components/Row';
 import useAuth from '../hooks/useAuth';
 import { ToastContainer, toast } from 'react-toastify';
 import { useRecoilValue } from 'recoil';
-import { modalState } from '../atoms/modalAtom';
+import { modalState, movieState } from '../atoms/modalAtom';
 import Modal from '../components/Modal';
 import Plans from '../components/Plans';
 import { getProducts, Product } from '@stripe/firestore-stripe-payments';
 import payments from '../lib/stripe';
 import useSubscription from '../hooks/useSubscription';
+import useList from '../hooks/useList';
 
 interface Props {
   netflixOriginals: Movie[];
@@ -42,6 +43,8 @@ const Home = ({
   const { loading, user } = useAuth();
   const showModal = useRecoilValue(modalState);
   const subscription = useSubscription(user);
+  const movie = useRecoilValue(movieState);
+  const list = useList(user?.uid);
 
   console.log(subscription);
 
@@ -81,6 +84,7 @@ const Home = ({
           <Row title="Top Rated" movies={topRated} />
           <Row title="Action Movies" movies={actionMovies} />
           {/* My List */}
+          {list.length > 0 && <Row title="My List" movies={list} />}
           <Row title="Comedy Movies" movies={comedyMovies} />
           <Row title="Horror Movies" movies={horrorMovies} />
           <Row title="Romance Movies" movies={romanceMovies} />

@@ -2,6 +2,7 @@ import { BellIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
+import BasicMenu from './BasicMenu';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,6 +34,7 @@ const Header = () => {
           className="cursor-pointer object-contain"
         />{' '}
         {/* No usó el componente de next js por los permisos */}
+        <BasicMenu />
         <ul className="hidden space-x-4 md:flex">
           <li className="headerLink">Home</li>
           <li className="headerLink">TV Shows</li>
